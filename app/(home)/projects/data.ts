@@ -5,7 +5,7 @@ const PROJECTS: Project[] = [
       "Personal platform to share my writings and showcase my open-source projects.",
     updatedAt: "2024-04",
     tags: ["TypeScript", "Next.js", "Tailwind CSS", "Redis"],
-    repoUrl: "https://github.com/tifandotme/website",
+    repoUrl: "https://github.com/tifandotme/tifan.me",
   },
   {
     name: "Crumpled Paper",
