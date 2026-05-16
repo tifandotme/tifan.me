@@ -12,11 +12,9 @@ See how to [exclude my own visits](https://umami.is/docs/exclude-my-own-visits) 
 
 ## TODOs
 
-- [ ] Ensure `eslint-plugin-tailwindcss` work with TW v4 (<https://github.com/francoismassart/eslint-plugin-tailwindcss/issues/325>)
 - [ ] Change Sandpack dark mode theme to GitHub Dark
 - [ ] Render placeholder image when fetching failed
 - [ ] Enlist to blogs.gn and ooh.directory
-- [ ] Migrate to BiomeJS?
 - [ ] Use Partial Prerendering?
 
 > also read TODO comments
