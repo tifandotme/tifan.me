@@ -40,7 +40,7 @@ export function Giscus() {
       <div className={cn(isLoading && "absolute top-0 w-full opacity-0")}>
         <GiscusReact
           id="giscus"
-          repo="tifandotme/website"
+          repo="tifandotme/tifan.me"
           repoId="R_kgDOJq-RTg"
           category="Replies"
           categoryId="DIC_kwDOJq-RTs4CYYEc"
