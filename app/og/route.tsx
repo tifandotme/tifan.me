@@ -15,27 +15,25 @@ export async function GET(req: NextRequest) {
 
   if (!postTitle) {
     return new ImageResponse(
-      (
-        <div
+      <div
+        style={{
+          background: "hsl(215 20% 65%)",
+          color: "hsl(0 0% 0%)",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Logo
           style={{
-            background: "hsl(215 20% 65%)",
-            color: "hsl(0 0% 0%)",
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
+            width: 180,
+            height: 180,
           }}
-        >
-          <Logo
-            style={{
-              width: 180,
-              height: 180,
-            }}
-          />
-        </div>
-      ),
+        />
+      </div>,
       {
         ...size,
       },
@@ -43,38 +41,36 @@ export async function GET(req: NextRequest) {
   }
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        background: "#94a3b8", // slate 400
+        color: "hsl(240 4% 15%)",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "center",
+        padding: "0 150px",
+        gap: "120px",
+      }}
+    >
+      <Logo
+        style={{
+          width: 87,
+          height: 87,
+        }}
+      />
       <div
         style={{
-          background: "#94a3b8", // slate 400
-          color: "hsl(240 4% 15%)",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          padding: "0 150px",
-          gap: "120px",
+          fontSize: 140,
+          lineHeight: 0.85,
+          letterSpacing: -2,
         }}
       >
-        <Logo
-          style={{
-            width: 87,
-            height: 87,
-          }}
-        />
-        <div
-          style={{
-            fontSize: 140,
-            lineHeight: 0.85,
-            letterSpacing: -2,
-          }}
-        >
-          {postTitle}
-        </div>
+        {postTitle}
       </div>
-    ),
+    </div>,
     {
       ...size,
       fonts: [
