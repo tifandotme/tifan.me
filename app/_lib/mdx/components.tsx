@@ -119,7 +119,6 @@ export const components: MDXComponents = {
     })
   },
   pre: ({ source, lang, children, ...props }) => {
-    console.log(this)
     return (
       // copy button is absolute positioned, so we need the parent to be relative
       // we also can't use `pre` as parent because the button somehow get scrolled horizontally
