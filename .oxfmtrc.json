@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [],
+  "semi": false,
+  "useTabs": false,
+  "tabWidth": 2,
+  "printWidth": 80
+}
