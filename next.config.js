@@ -33,12 +33,12 @@ const config = {
   async rewrites() {
     return [
       {
-        source: "/umami/:match*",
-        destination: "https://analytics.tifan.me/:match*",
-      },
-      {
         source: "/gpg",
         destination: "https://github.com/tifandotme.gpg",
+      },
+      {
+        source: "/resume",
+        destination: "https://resume.tifan.me/resume.pdf",
       },
     ]
   },
