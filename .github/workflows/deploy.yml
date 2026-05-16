@@ -1,0 +1,32 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-slim
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+
+      - name: Install Vercel CLI
+        run: bun install -g vercel
+
+      - name: Deploy Production to Vercel
+        id: deploy
+        run: |
+          OUTPUT=$(vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }})
+          DEPLOY_URL=$(echo "$OUTPUT" | grep -o 'https://[^ ]*\.vercel\.app' | head -1)
+          echo "Production URL: $DEPLOY_URL"
+          echo "deploy_url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
