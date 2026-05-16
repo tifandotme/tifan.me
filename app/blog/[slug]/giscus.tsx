@@ -5,6 +5,12 @@ import { useEffect, useState } from "react"
 import { cn } from "../../_lib/utils"
 
 export function Giscus() {
+  if (process.env.NODE_ENV !== "production") return null
+
+  return <GiscusEmbed />
+}
+
+function GiscusEmbed() {
   const [origin, setOrigin] = useState("https://tifan.me")
   const [isLoading, setIsLoading] = useState(true)
 
@@ -44,7 +50,7 @@ export function Giscus() {
           repoId="R_kgDOJq-RTg"
           category="Replies"
           categoryId="DIC_kwDOJq-RTs4CYYEc"
-          mapping="og:title"
+          mapping="pathname"
           strict="1"
           reactionsEnabled="0"
           emitMetadata="0"
