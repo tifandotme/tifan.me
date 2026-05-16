@@ -7,8 +7,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date().toISOString().split("T")[0],
   }))
 
-  const posts = await getAllPosts().then((posts) =>
-    posts.map((post) => ({
+  const posts = await getAllPosts().then((all) =>
+    all.map((post) => ({
       url: post.url,
       lastModified: post.publishedAt,
     })),
