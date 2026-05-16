@@ -24,14 +24,18 @@
 }
 
 @theme {
-  --font-sans: var(--nunito-sans), ui-sans-serif, system-ui, sans-serif,
+  --font-sans:
+    var(--nunito-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: var(--newsreader), ui-serif, Georgia, Cambria,
-    "Times New Roman", Times, serif;
-  --font-heading: var(--instrument-serif), ui-serif, Georgia, Cambria,
-    "Times New Roman", Times, serif;
-  --font-mono: var(--commitmono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-serif:
+    var(--newsreader), ui-serif, Georgia, Cambria, "Times New Roman", Times,
+    serif;
+  --font-heading:
+    var(--instrument-serif), ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+  --font-mono:
+    var(--commitmono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 
   --color-foreground: oklch(var(--foreground));
   --color-background: oklch(var(--background));
