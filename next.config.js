@@ -1,9 +1,8 @@
-import withPlaiceholder from "@plaiceholder/next"
-
 /** @type {import("next").NextConfig} */
 const config = {
+  reactCompiler: true,
+  serverExternalPackages: ["sharp"],
   experimental: {
-    reactCompiler: true,
     typedEnv: true,
   },
   logging: {
@@ -81,18 +80,18 @@ const config = {
             value: "camera=(), microphone=(), geolocation=()",
           },
           // To allow for loading /giscus.css in development mode
-          ...(process.env.NODE_ENV === "development" ?
-            [
-              {
-                key: "Access-Control-Allow-Origin",
-                value: "*",
-              },
-            ]
-          : []),
+          ...(process.env.NODE_ENV === "development"
+            ? [
+                {
+                  key: "Access-Control-Allow-Origin",
+                  value: "*",
+                },
+              ]
+            : []),
         ],
       },
     ]
   },
 }
 
-export default withPlaiceholder(config)
+export default config

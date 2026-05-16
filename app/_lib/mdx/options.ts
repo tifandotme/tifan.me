@@ -1,6 +1,6 @@
+import type { EvaluateOptions } from "@mdx-js/mdx"
 import rehypeShiki, { type RehypeShikiOptions } from "@shikijs/rehype"
 import { transformerMetaHighlight } from "@shikijs/transformers"
-import type { MDXRemoteProps } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings, {
   type Options as AutolinkHeadingsOptions,
 } from "rehype-autolink-headings"
@@ -38,13 +38,14 @@ function transformerLanguageLabel(): ShikiTransformer {
   }
 }
 
-type MDXOptions = NonNullable<
-  NonNullable<MDXRemoteProps["options"]>["mdxOptions"]
+type MDXOptions = Pick<
+  EvaluateOptions,
+  "remarkPlugins" | "rehypePlugins" | "recmaPlugins"
 >
 
 export const mdxOptions: MDXOptions = {
+  remarkPlugins: [[remarkGfm, {} satisfies RemarkGfmOptions]],
   rehypePlugins: [
-    [remarkGfm, {} satisfies RemarkGfmOptions],
     [
       rehypeShiki,
       {

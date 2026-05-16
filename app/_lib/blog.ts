@@ -1,9 +1,29 @@
-import { compileMDX } from "next-mdx-remote/rsc"
+import { evaluate } from "@mdx-js/mdx"
 import fs from "node:fs"
 import path from "node:path"
+import React from "react"
+import * as devJsx from "react/jsx-dev-runtime"
+import * as prodJsx from "react/jsx-runtime"
+import { VFile } from "vfile"
+import { matter } from "vfile-matter"
 import { components } from "./mdx/components"
 import { mdxOptions } from "./mdx/options"
 import { slugify } from "./utils"
+
+const development = process.env.NODE_ENV !== "production"
+
+const runtime = development
+  ? {
+      Fragment: devJsx.Fragment,
+      jsxDEV: devJsx.jsxDEV,
+      development: true as const,
+    }
+  : {
+      Fragment: prodJsx.Fragment,
+      jsx: prodJsx.jsx,
+      jsxs: prodJsx.jsxs,
+      development: false as const,
+    }
 
 /**
  * Extract headings from a raw MDX source.
@@ -62,14 +82,17 @@ async function parseMDXFile(file: string) {
   const source = fs.readFileSync(path.join(process.cwd(), file), "utf-8")
 
   const headings = extractHeadings(source)
-  const { frontmatter, content } = await compileMDX<Frontmatter>({
-    source,
-    components,
-    options: {
-      mdxOptions,
-      parseFrontmatter: true,
-    },
+
+  const vfile = new VFile(source)
+  matter(vfile, { strip: true })
+  const frontmatter = (vfile.data["matter"] ?? {}) as Frontmatter
+
+  const { default: MDXContent } = await evaluate(vfile, {
+    ...mdxOptions,
+    ...runtime,
   })
+
+  const content = React.createElement(MDXContent, { components })
 
   return { frontmatter, content, headings }
 }

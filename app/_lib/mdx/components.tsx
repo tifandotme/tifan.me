@@ -1,4 +1,4 @@
-import type { MDXRemoteProps } from "next-mdx-remote/rsc"
+import type { MDXComponents } from "mdx/types"
 import Image from "next/image"
 import React from "react"
 import {
@@ -15,8 +15,6 @@ import { cn } from "../utils"
 import { CopyButton } from "./copy"
 import { Sandpack } from "./sandpack"
 import styles from "./tweet.module.css"
-
-type MDXComponents = MDXRemoteProps["components"]
 
 export const components: MDXComponents = {
   Image: ({
