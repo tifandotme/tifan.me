@@ -76,7 +76,7 @@ export function ToggleableEmail() {
       )}
       onClick={handleCaptchaClick}
     >
-      {state.isHidden ?
+      {state.isHidden ? (
         <>
           <Icon
             id="eye-closed"
@@ -84,10 +84,11 @@ export function ToggleableEmail() {
           />
           <span>show email</span>
         </>
-      : <a className="font-bold hover:underline" href={`mailto:${EMAIL!}`}>
+      ) : (
+        <a className="font-bold hover:underline" href={`mailto:${EMAIL!}`}>
           {EMAIL!}
         </a>
-      }
+      )}
 
       {state.isRendered &&
         createPortal(

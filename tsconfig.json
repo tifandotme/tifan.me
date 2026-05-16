@@ -1,38 +1,16 @@
 {
+  "extends": [
+    "@tsconfig/next/tsconfig.json",
+    "@tsconfig/strictest/tsconfig.json"
+  ],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "target": "ES2017",
     "module": "Preserve",
-    // ^ also implies:
-    // "moduleResolution": "bundler",
-    // "esModuleInterop": true,
-    // "resolveJsonModule": true,
-
-    "allowJs": true,
     "checkJs": true,
-
-    "noEmit": true,
-    "incremental": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
-
-    "strict": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    // "exactOptionalPropertyTypes": true, // somehow still has issue with `href="/"` in Link component
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-
-    "plugins": [{ "name": "next" }]
+    // exactOptionalPropertyTypes from strictest breaks `href="/"` on next/link
+    "exactOptionalPropertyTypes": false,
+    "target": "ES2017"
   },
   "include": [
     ".next/types/**/*.ts",

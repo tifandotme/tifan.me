@@ -33,10 +33,10 @@ export function Views({
       }
     }
 
-    fetchViews(slug, increment).then((views) => {
-      setViews(views)
-      if (views !== null) {
-        sessionStorage.setItem("views-" + slug, String(views))
+    fetchViews(slug, increment).then((next) => {
+      setViews(next)
+      if (next !== null) {
+        sessionStorage.setItem("views-" + slug, String(next))
       }
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,12 +72,13 @@ export function Views({
       {...props}
     >
       <Icon id="eye-open" className="absolute left-0 size-[1em]" />
-      {views === undefined ?
+      {views === undefined ? (
         <LoadingDots className="ml-[1.5em]" />
-      : <span className="ml-[1.3em]" ref={ref}>
+      ) : (
+        <span className="ml-[1.3em]" ref={ref}>
           {views}
         </span>
-      }
+      )}
     </span>
   )
 }

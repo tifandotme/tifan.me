@@ -19,11 +19,11 @@ export function useMediaQuery(
     initializeWithValue = true,
   }: UseMediaQueryOptions = {},
 ): boolean {
-  const getMatches = (query: string): boolean => {
+  const getMatches = (q: string): boolean => {
     if (IS_SERVER) {
       return defaultValue
     }
-    return window.matchMedia(query).matches
+    return window.matchMedia(q).matches
   }
 
   const [matches, setMatches] = useState<boolean>(() => {

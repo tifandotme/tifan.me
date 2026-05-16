@@ -20,8 +20,8 @@ export function Projects() {
 
   useEffect(() => {
     if (isPending) return
-    setData((data) =>
-      data.toSorted((a, b) => {
+    setData((prev) =>
+      prev.toSorted((a, b) => {
         if (sortBy === "stars") return b.stars - a.stars
         return Intl.Collator().compare(b.updatedAt, a.updatedAt)
       }),

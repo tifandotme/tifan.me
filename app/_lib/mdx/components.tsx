@@ -60,7 +60,7 @@ export const components: MDXComponents = {
   Tweet: async ({ id }: { id: string }) => {
     try {
       const tweet = await getTweet(id)
-      const components: TwitterComponents = {
+      const tweetComponents: TwitterComponents = {
         AvatarImg: (props) => (
           <Image {...props} alt="Tweet Avatar" unoptimized />
         ),
@@ -71,12 +71,13 @@ export const components: MDXComponents = {
 
       return (
         <div className={cn("not-prose flex justify-center", styles["tweet"])}>
-          {tweet ?
-            <EmbeddedTweet tweet={tweet} components={components} />
-          : <TweetContainer className="flex flex-col items-center py-3">
+          {tweet ? (
+            <EmbeddedTweet tweet={tweet} components={tweetComponents} />
+          ) : (
+            <TweetContainer className="flex flex-col items-center py-3">
               <p className="text-[1.0625rem]">Tweet not found</p>
             </TweetContainer>
-          }
+          )}
         </div>
       )
     } catch (err) {

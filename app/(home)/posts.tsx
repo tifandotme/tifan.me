@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, memo, useMemo } from "react"
 import { Icon } from "../_components/icon"
 import { Views } from "../_components/views"
-import { getAllPosts } from "../_lib/blog"
-import { cn, formatDateDynamic } from "../_lib/utils"
+import type { getAllPosts } from "../_lib/blog"
+import { formatDateDynamic } from "../_lib/utils"
 
 type Post = Awaited<ReturnType<typeof getAllPosts>>[number]
 
@@ -13,8 +13,13 @@ interface PostsProps {
   posts: Post[]
 }
 
-export function Posts({ posts }: PostsProps) {
+export const Posts = memo(function Posts({ posts }: PostsProps) {
   const [isEnglishOnly, setIsEnglishOnly] = useState<boolean | null>(null)
+
+  const filteredPosts = useMemo(() => {
+    if (isEnglishOnly === null || isEnglishOnly === false) return posts
+    return posts.filter((post) => post.lang === "en")
+  }, [posts, isEnglishOnly])
 
   if (posts.length === 0) {
     return null
@@ -45,14 +50,8 @@ export function Posts({ posts }: PostsProps) {
       </div>
 
       <ul className="container-md">
-        {posts.map((post) => (
-          <li
-            key={post.slug}
-            className={cn(
-              "mb-2 last:mb-0",
-              isEnglishOnly && post.lang !== "en" && "hidden",
-            )}
-          >
+        {filteredPosts.map((post) => (
+          <li key={post.slug} className="mb-2 last:mb-0">
             <Link
               className="relative -mx-4 flex flex-col gap-2 p-4 hover:bg-muted-darker/10 active:bg-muted-darker/10 sm:-mx-3 sm:p-3"
               href={post.url}
@@ -80,4 +79,4 @@ export function Posts({ posts }: PostsProps) {
       </ul>
     </>
   )
-}
+})

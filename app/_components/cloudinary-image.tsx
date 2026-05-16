@@ -17,24 +17,25 @@ export async function CloudinaryImage({
   ...props
 }: CloudinaryImageProps) {
   try {
+    const fetchBuffer = async (url: string) => {
+      const ab = await fetch(url, { cache: "force-cache" }).then((res) =>
+        res.arrayBuffer(),
+      )
+      return Buffer.from(ab)
+    }
+
     const {
       metadata: { height },
     } = await getPlaiceholder(
-      Buffer.from(
-        await fetch(
-          `https://res.cloudinary.com/tifan/$w_${width}/t_1/${publicId}`,
-          { cache: "force-cache" },
-        ).then((res) => res.arrayBuffer()),
+      await fetchBuffer(
+        `https://res.cloudinary.com/tifan/$w_${width}/t_1/${publicId}`,
       ),
       { size: 10 },
     )
 
     const { base64 } = await getPlaiceholder(
-      Buffer.from(
-        await fetch(
-          `https://res.cloudinary.com/tifan/t_placeholder/${publicId}`,
-          { cache: "force-cache" },
-        ).then((res) => res.arrayBuffer()),
+      await fetchBuffer(
+        `https://res.cloudinary.com/tifan/t_placeholder/${publicId}`,
       ),
       { size: 10 },
     )
