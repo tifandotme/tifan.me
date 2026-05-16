@@ -1,4 +1,4 @@
-# tifan.me &nbsp; <picture><img alt="GitHub Commit Activity (Month)" src="https://img.shields.io/github/commit-activity/m/tifandotme/website" /></picture>
+# tifan.me &nbsp; <picture><img alt="GitHub Commit Activity (Month)" src="https://img.shields.io/github/commit-activity/m/tifandotme/tifan.me" /></picture>
 
 My personal website.
 
@@ -35,4 +35,4 @@ See how to [exclude my own visits](https://umami.is/docs/exclude-my-own-visits) 
 ## License
 
 All blog posts are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)<br>
-Source code is licensed under [MIT](https://github.com/tifandotme/website/blob/master/LICENSE)
+Source code is licensed under [MIT](https://github.com/tifandotme/tifan.me/blob/master/LICENSE)
