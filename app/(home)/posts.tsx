@@ -1,7 +1,7 @@
 "use client"
 
-import { usePostHog } from "@posthog/next"
 import Link from "next/link"
+import posthog from "posthog-js"
 import { useState, memo, useMemo } from "react"
 import { Icon } from "../_components/icon"
 import { Views } from "../_components/views"
@@ -15,7 +15,6 @@ interface PostsProps {
 }
 
 export const Posts = memo(function Posts({ posts }: PostsProps) {
-  const posthog = usePostHog()
   const [isEnglishOnly, setIsEnglishOnly] = useState<boolean | null>(null)
 
   const filteredPosts = useMemo(() => {

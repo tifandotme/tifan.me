@@ -1,6 +1,4 @@
-import { PostHogPageView, PostHogProvider } from "@posthog/next"
 import type { Metadata } from "next"
-import { Suspense } from "react"
 import { fonts } from "./_lib/fonts"
 import "./globals.css"
 import { PreloadResources } from "./preload"
@@ -39,27 +37,13 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
-  const posthogKey = process.env["NEXT_PUBLIC_POSTHOG_KEY"]
-
   return (
     <html lang="en" className={fonts.map((font) => font.variable).join(" ")}>
       <head>
         <SandPackCSS />
       </head>
       <body>
-        {posthogKey ? (
-          <PostHogProvider
-            apiKey={posthogKey}
-            clientOptions={{ api_host: "/ph" }}
-          >
-            <Suspense fallback={null}>
-              <PostHogPageView />
-            </Suspense>
-            {children}
-          </PostHogProvider>
-        ) : (
-          children
-        )}
+        {children}
         <PreloadResources />
         <noscript>
           <style>{`.no-js {display: none;}`}</style>
