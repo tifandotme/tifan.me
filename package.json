@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "dev": "vercel env pull .env.local --yes && next dev",
+    "dev": "next dev",
+    "env:pull": "vercel env pull .env.local --yes",
     "start": "next start",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
