@@ -5,7 +5,7 @@ publishedAt: "2023-08-29"
 lang: "en"
 ---
 
-I first came across this problem on an online assessment for a job application. In this post, I will try to to revisit this problem and solve it. I will be using TypeScript for this solution.
+I first came across this problem during an online assessment for a job. In this post, I'll revisit it and solve it using TypeScript.
 
 ## Problem Statement
 
@@ -15,7 +15,7 @@ Taken from the [problem description](https://leetcode.com/problems/integer-to-en
 >
 > Constraint: `0 <= num <= 2^31 - 1`
 
-This problem asks us to convert a number to its English words representation. With constraint that num a has a maximum value of 32-bit signed integer, which is equal to 2.147.483.647 and is a positive number.
+This problem asks us to convert a number to its English words representation. The constraint is that num has a maximum value of 2^31 - 1 (2,147,483,647), a positive number.
 
 For example, `123` should be converted to `One Hundred Twenty Three` and `123456791` should be converted to `One Hundred Twenty Three Million Four Hundred Fifty Six Thousand Seven Hundred Ninety One`. Sounds easy enough, huh? (Spoiler alert: it's not)
 
@@ -23,7 +23,7 @@ For example, `123` should be converted to `One Hundred Twenty Three` and `123456
 
 ### Step 1. Creating Dictionary
 
-This dictionary maps a number to its English words representation. We will use this dictionary whenever we need to convert a number.
+This dictionary maps numbers to their English words. We'll use it to convert numbers.
 
 ```ts
 const translations: Record<number, string> = {
@@ -101,16 +101,16 @@ function convert(num: number): string {
 }
 ```
 
-We are mutating the `num` variable until it reaches 0. Let's break down the logic:
+Let's break down the logic:
 
-1. First, we handle the hundreds (if there is any). We divide the `num` by 100 and round it down to the nearest integer with `Math.floor` method. For example, if `num` is 123, we will get 1.23 which will be rounded down to 1. We store this number in `hundred` variable.
-1. We then use this number to access the dictionary and concatenate it with the word "Hundred". For example, if `num` is 123, we will get "One Hundred". This get appended to the `result` variable.
-1. We mutate `num`, substracting it with `hundred`. After the subtraction, if `num` is 0, we will return the `result` variable. Otherwise, we will continue to the next step.
-1. Since number 1-20 English words representation is unique (no more combination), we can just access the dictionary with the `num` and append it to the `result` variable. Otherwise, we will do the same thing as we did with the hundreds.
+1. First, we handle the hundreds (if any). We divide num by 100 and floor it. For example, 123 gives 1. We append "One Hundred" to result.
+2. We subtract hundred \* 100 from num.
+3. If num > 0, and `<=20`, append the direct translation. Otherwise, append the ten's place (like "Twenty") and then the one's if any.
+4. Return the result.
 
 ### Step 3. Converting billions, millions, and thousands
 
-We had just finished with `convert` function that deals with the hundreds, tens, and ones. Now, we will create the actual `numberToWords` function.
+We've created the convert function for up to 999. Now let's write the main numberToWords function.
 
 ```ts
 function numberToWords(num: number): string {
@@ -147,6 +147,6 @@ function numberToWords(num: number): string {
 }
 ```
 
-As you can see, we are using the `convert` function that we created in the previous step. We are also mutating the `num` variable until it reaches 0, starting from the leftmost scale component (billion) to the right (thousand). Except this time, we are converting the the numbers with the the `convert` function since it conveniently handles 3-digit numbers.
+We use the convert function we just created. We mutate num from billions down to thousands. Since convert handles 3-digit numbers, we use it for each scale.
 
 The full code will look like [this](https://github.com/tifandotme/leetcode/blob/dd3559cbf5473b018d31a2306079ef4ea2117375/hard/273.integer-to-english-words.ts).
