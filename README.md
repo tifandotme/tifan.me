@@ -2,8 +2,6 @@
 
 My personal website.
 
-See how to [exclude my own visits](https://umami.is/docs/exclude-my-own-visits) in analytics.
-
 ## Writing Guide
 
 - Prefix .mdx files with "\_" to exclude from build, essentially making it a draft
@@ -27,7 +25,7 @@ See how to [exclude my own visits](https://umami.is/docs/exclude-my-own-visits) 
 - Media: [Cloudinary](https://cloudinary.com/)
 - Database: [Upstash](https://upstash.com/)
 - Comment: [Giscus](https://giscus.app/)
-- Analytics: [Umami](https://umami.is/)
+- Analytics: [PostHog](https://posthog.com/)
 - Deployment: [Vercel](https://vercel.com/)
 
 ## License
