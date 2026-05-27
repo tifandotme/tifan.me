@@ -1,6 +1,6 @@
 "use server"
 
-const URL = process.env["NEXT_PUBLIC_HCAPTCHA_SITE_KEY"]
+const URL = process.env["KV_REST_API_URL"]
 const TOKEN = process.env["KV_REST_API_TOKEN"]
 if (!URL || !TOKEN) {
   throw new Error("KV_REST_API_URL or KV_REST_API_TOKEN is not set")

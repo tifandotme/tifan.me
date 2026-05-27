@@ -1,3 +1,5 @@
+import { withPostHogConfig } from "@posthog/nextjs-config"
+
 /** @type {import("next").NextConfig} */
 const config = {
   reactCompiler: true,
@@ -32,6 +34,18 @@ const config = {
   async rewrites() {
     return [
       {
+        source: "/ph/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/ph/array/:path*",
+        destination: "https://us-assets.i.posthog.com/array/:path*",
+      },
+      {
+        source: "/ph/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+      {
         source: "/gpg",
         destination: "https://github.com/tifandotme.gpg",
       },
@@ -41,6 +55,7 @@ const config = {
       },
     ]
   },
+  skipTrailingSlashRedirect: true,
   async headers() {
     return [
       {
@@ -94,4 +109,12 @@ const config = {
   },
 }
 
-export default config
+const posthogApiKey = process.env["POSTHOG_API_KEY"]
+const posthogEnvId = process.env["POSTHOG_ENV_ID"]
+
+export default posthogApiKey && posthogEnvId
+  ? withPostHogConfig(config, {
+      personalApiKey: posthogApiKey,
+      envId: posthogEnvId,
+    })
+  : config

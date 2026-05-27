@@ -30,7 +30,6 @@ export default async function HomePage() {
                 href={link.href}
                 rel="noopener noreferrer"
                 target="_blank"
-                data-umami-event={`${link.label} link`}
               >
                 {link.label}
                 <Icon id="external" className="size-4 text-muted-darker/80" />

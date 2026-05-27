@@ -1,5 +1,6 @@
 "use client"
 
+import { usePostHog } from "@posthog/next"
 import Link from "next/link"
 import { useState, memo, useMemo } from "react"
 import { Icon } from "../_components/icon"
@@ -14,6 +15,7 @@ interface PostsProps {
 }
 
 export const Posts = memo(function Posts({ posts }: PostsProps) {
+  const posthog = usePostHog()
   const [isEnglishOnly, setIsEnglishOnly] = useState<boolean | null>(null)
 
   const filteredPosts = useMemo(() => {
@@ -35,8 +37,8 @@ export const Posts = memo(function Posts({ posts }: PostsProps) {
           aria-checked={isEnglishOnly ?? false}
           onClick={() => {
             setIsEnglishOnly((prev) => !prev)
+            posthog.capture("English Only toggle")
           }}
-          data-umami-event="English Only toggle"
         >
           <span
             className="relative inline-flex items-center justify-center"

@@ -1,6 +1,7 @@
+import { PostHogPageView, PostHogProvider } from "@posthog/next"
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { fonts } from "./_lib/fonts"
-import { FloatingUmamiIndicator } from "./floating-umami-indicator"
 import "./globals.css"
 import { PreloadResources } from "./preload"
 import { SandPackCSS } from "./sandpack-css"
@@ -38,26 +39,28 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
+  const posthogKey = process.env["NEXT_PUBLIC_POSTHOG_KEY"]
+
   return (
     <html lang="en" className={fonts.map((font) => font.variable).join(" ")}>
       <head>
         <SandPackCSS />
       </head>
       <body>
-        {children}
-        <PreloadResources />
-        {process.env.NODE_ENV === "production" && (
-          <>
-            <script
-              defer
-              src="/umami/script.js"
-              data-website-id="8f49618f-b08d-4168-9bd2-003e22eb4cb4"
-              data-domains="tifan.me"
-              data-cache="true"
-            />
-            <FloatingUmamiIndicator />
-          </>
+        {posthogKey ? (
+          <PostHogProvider
+            apiKey={posthogKey}
+            clientOptions={{ api_host: "/ph" }}
+          >
+            <Suspense fallback={null}>
+              <PostHogPageView />
+            </Suspense>
+            {children}
+          </PostHogProvider>
+        ) : (
+          children
         )}
+        <PreloadResources />
         <noscript>
           <style>{`.no-js {display: none;}`}</style>
         </noscript>
