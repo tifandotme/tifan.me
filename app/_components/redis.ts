@@ -1,9 +1,11 @@
 "use server"
 
-const URL = process.env["KV_REST_API_URL"]
-const TOKEN = process.env["KV_REST_API_TOKEN"]
+const URL = process.env["UPSTASH_REDIS_REST_URL"]
+const TOKEN = process.env["UPSTASH_REDIS_REST_TOKEN"]
 if (!URL || !TOKEN) {
-  throw new Error("KV_REST_API_URL or KV_REST_API_TOKEN is not set")
+  throw new Error(
+    "UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN is not set",
+  )
 }
 
 export async function fetchViews(slug: string, increment = false) {
