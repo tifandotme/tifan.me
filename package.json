@@ -4,6 +4,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "deploy:prod": "gh workflow run deploy.yml --ref master",
     "env:pull": "vercel env pull .env.local --yes",
     "start": "next start",
     "format": "oxfmt .",
