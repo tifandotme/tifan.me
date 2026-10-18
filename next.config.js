@@ -3,7 +3,6 @@ import { withPostHogConfig } from "@posthog/nextjs-config"
 /** @type {import("next").NextConfig} */
 const config = {
   reactCompiler: true,
-  serverExternalPackages: ["sharp"],
   experimental: {
     typedEnv: true,
   },
