@@ -4,21 +4,12 @@ My personal website.
 
 ## Development
 
-Use Vite+ 1.3.0 with Node.js 24.11 or newer on the Node.js 24 release line.
-Bun 1.4.4 manages dependencies only; Node.js runs the tools and application.
+With Vite+ and Node.js 24.11+ (24.x) installed:
 
 ```sh
 vp install --frozen-lockfile
 vp run dev
-vp check
-vp test run
-vp run build
-vp run start
 ```
-
-Lint, format, and test settings live in `vite.config.ts`. `vp check` includes
-type-aware linting and type checking. Use `vp run dev` and `vp run build` for
-Next.js; the built-in `vp dev` and `vp build` commands run Vite instead.
 
 ## License
 
