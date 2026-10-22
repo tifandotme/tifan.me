@@ -16,25 +16,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@68f39c78aaf39be468cabd2afb09c162574c84af # v1.21.2
         with:
-          bun-version: 1.4.3
+          node-version: "24"
+          package-manager: true
+          run-install: false
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: vp install --frozen-lockfile
 
-      - name: Check formatting
-        run: bunx oxfmt --check app package.json next.config.js postcss.config.js instrumentation-client.ts tsconfig.json
+      - name: Check formatting, lint, and types
+        run: vp check
 
-      - name: Lint
-        run: bun run lint
-
-      - name: Typecheck
-        run: bun run typecheck
+      - name: Test
+        run: vp test run
 
       - name: Build
-        run: bun run build
+        run: vp run build
         env:
           NEXT_PUBLIC_EMAIL: ci@example.invalid
           NEXT_PUBLIC_HCAPTCHA_SITE_KEY: ci-placeholder

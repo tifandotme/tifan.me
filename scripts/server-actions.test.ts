@@ -1,20 +1,24 @@
 import assert from "node:assert/strict"
 import { execFileSync } from "node:child_process"
-import { test } from "node:test"
+import { afterEach, test, vi } from "vite-plus/test"
 import { fetchStargazersCount } from "../app/(home)/projects/github.ts"
 import { fetchViews } from "../app/_components/redis.ts"
 
 /* eslint-disable no-await-in-loop -- Cases share a fetch stub and must run sequentially. */
 
-test("count actions decode API responses and fall back on failures", async (t) => {
+afterEach(() => {
+  vi.restoreAllMocks()
+})
+
+test("count actions decode API responses and fall back on failures", async () => {
   const originalEnv = { ...process.env }
   process.env["UPSTASH_REDIS_REST_URL"] = "https://redis.example.test"
   process.env["UPSTASH_REDIS_REST_TOKEN"] = "test-redis-token"
   process.env["GITHUB_ACCESS_TOKEN"] = "test-github-token"
 
   let response = () => Response.json({ result: "37", stargazers_count: 89 })
-  t.mock.method(globalThis, "fetch", async () => response())
-  t.mock.method(console, "error", () => {})
+  vi.spyOn(globalThis, "fetch").mockImplementation(async () => response())
+  vi.spyOn(console, "error").mockImplementation(() => {})
 
   try {
     assert.equal(await fetchViews("post"), 37)
