@@ -9,6 +9,14 @@
 - Blog post headings start at `h2` and go through `h4`.
 - Read TODO comments before making related changes.
 
+## Learning more about Effect
+
+This repository uses the Effect TypeScript library. Use the latest Effect v4 release.
+
+Before writing any Effect code, first read `node_modules/effect/AGENTS.md` **completely**, and follow the links in the file when required.
+
+If you need to learn more about particular Effect APIs and concepts that the guide does not cover, search through the source code in `node_modules/effect/src`.
+
 ## Agent skills
 
 ### Issue tracker

@@ -1,36 +1,62 @@
 "use server"
 
-const URL = process.env["UPSTASH_REDIS_REST_URL"]
-const TOKEN = process.env["UPSTASH_REDIS_REST_TOKEN"]
-if (!URL || !TOKEN) {
-  throw new Error(
-    "UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN is not set",
-  )
-}
+import { Config, Effect, Redacted, Schema } from "effect"
+import {
+  FetchHttpClient,
+  HttpBody,
+  HttpClient,
+  HttpClientResponse,
+} from "effect/http"
 
-export async function fetchViews(slug: string, increment = false) {
-  try {
-    const res = await fetch(URL!, {
-      method: "POST",
+const decodeViews = HttpClientResponse.schemaBodyJson(
+  Schema.Struct({
+    result: Schema.NullOr(
+      Schema.Union([
+        Schema.Natural,
+        Schema.NumberFromString.check(
+          Schema.isInt(),
+          Schema.isGreaterThanOrEqualTo(0),
+        ),
+      ]),
+    ),
+  }),
+)
+
+export async function fetchViews(
+  slug: string,
+  increment = false,
+): Promise<number | null> {
+  return Effect.gen(function* () {
+    const url = yield* Config.URL("UPSTASH_REDIS_REST_URL")
+    const token = yield* Config.schema(
+      Schema.Redacted(Schema.NonEmptyString),
+      "UPSTASH_REDIS_REST_TOKEN",
+    )
+    const client = HttpClient.filterStatusOk(yield* HttpClient.HttpClient)
+    const response = yield* client.post(url, {
       headers: {
-        Authorization: `Bearer ${TOKEN!}`,
+        Authorization: `Bearer ${Redacted.value(token)}`,
       },
-      body: JSON.stringify(
-        increment ? ["HINCRBY", "views", slug, 1] : ["HGET", "views", slug],
+      body: HttpBody.text(
+        JSON.stringify(
+          increment ? ["HINCRBY", "views", slug, 1] : ["HGET", "views", slug],
+        ),
       ),
-      next: {
-        revalidate: 0,
-      },
     })
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch Upstash API")
-    }
-
-    const result = (await res.json()).result as string | null
-    return result === null ? null : Number(result)
-  } catch (err) {
-    console.error(err instanceof Error ? err.message : "An error occured")
-    return null
-  }
+    const { result } = yield* decodeViews(response)
+    return result
+  }).pipe(
+    Effect.provide(FetchHttpClient.layer),
+    Effect.provideService(FetchHttpClient.RequestInit, {
+      next: { revalidate: 0 },
+    }),
+    Effect.match({
+      onFailure: (error) => {
+        console.error(error.message)
+        return null
+      },
+      onSuccess: (views) => views,
+    }),
+    Effect.runPromise,
+  )
 }
