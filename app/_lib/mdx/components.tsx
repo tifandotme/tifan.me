@@ -1,3 +1,4 @@
+import { cn } from "cn"
 import type { MDXComponents } from "mdx/types"
 import Image from "next/image"
 import React from "react"
@@ -11,7 +12,6 @@ import {
   CloudinaryImage,
   type CloudinaryImageProps,
 } from "../../_components/cloudinary-image"
-import { cn } from "../utils"
 import { CopyButton } from "./copy"
 import { Sandpack } from "./sandpack"
 import styles from "./tweet.module.css"
@@ -114,7 +114,7 @@ export const components: MDXComponents = {
     }
 
     return React.cloneElement(children, {
-      className: cn("col-span-full!", children.props.className) ?? "",
+      className: cn("col-span-full!", children.props.className),
     })
   },
   pre: ({ source, lang, children, ...props }) => {

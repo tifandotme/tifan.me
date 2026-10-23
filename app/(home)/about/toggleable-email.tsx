@@ -1,10 +1,10 @@
 "use client"
 
 import HCaptcha from "@hcaptcha/react-hcaptcha"
+import { cn } from "cn"
 import { useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { Icon } from "../../_components/icon"
-import { cn } from "../../_lib/utils"
 
 const STORAGE_KEY = "email-unlocked"
 

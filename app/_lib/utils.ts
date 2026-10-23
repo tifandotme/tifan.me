@@ -1,13 +1,3 @@
-export function cn(...args: unknown[]): string | undefined {
-  return (
-    args
-      .flat()
-      .filter((x) => typeof x === "string")
-      .join(" ")
-      .trim() || undefined
-  )
-}
-
 export function formatDate(
   date: string,
   { fullMonth = false, includeDay = true, includeYear = true } = {},

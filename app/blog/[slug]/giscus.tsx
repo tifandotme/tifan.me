@@ -1,8 +1,8 @@
 "use client"
 
 import GiscusReact from "@giscus/react"
+import { cn } from "cn"
 import { useEffect, useState } from "react"
-import { cn } from "../../_lib/utils"
 
 export function Giscus() {
   if (process.env.NODE_ENV !== "production") return null

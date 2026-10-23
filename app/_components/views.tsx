@@ -1,7 +1,7 @@
 "use client"
 
+import { cn } from "cn"
 import { useEffect, useRef, useState } from "react"
-import { cn } from "../_lib/utils"
 import { Icon } from "./icon"
 import { fetchViews } from "./redis"
 

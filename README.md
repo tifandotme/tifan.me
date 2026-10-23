@@ -4,11 +4,11 @@ My personal website.
 
 ## Development
 
-With Vite+ and Node.js 24.11+ (24.x) installed:
+With Vite+ installed, use the pinned Node.js 24.22.1 and Bun 1.4.4:
 
 ```sh
-vp install --frozen-lockfile
-vp run dev
+vp env exec --node 24.22.1 --package-manager bun@1.4.4 vp install --frozen-lockfile
+vp env exec --node 24.22.1 --package-manager bun@1.4.4 vp run dev
 ```
 
 ## License

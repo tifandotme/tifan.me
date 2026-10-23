@@ -1,8 +1,8 @@
 "use client"
 
+import { cn } from "cn"
 import { useState } from "react"
 import { Icon } from "../../_components/icon"
-import { cn } from "../utils"
 
 interface CopyButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   source: string

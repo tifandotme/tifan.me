@@ -92,7 +92,7 @@ export const mdxOptions: MDXOptions = {
           type: "element",
           tagName: "svg",
           properties: {
-            className: "inline ml-px size-4 text-muted-darker/80",
+            className: ["inline", "ml-px", "size-4", "text-muted-darker/80"],
           },
           children: [
             {
@@ -106,7 +106,7 @@ export const mdxOptions: MDXOptions = {
           ],
         },
         contentProperties: {
-          className: "print:hidden",
+          className: ["print:hidden"],
           "aria-hidden": true,
         },
         target: "_blank",

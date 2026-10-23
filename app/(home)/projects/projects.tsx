@@ -1,10 +1,11 @@
 "use client"
 
+import { cn } from "cn"
 import type { Metadata } from "next"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { Icon } from "../../_components/icon"
-import { cn, formatDate, slugify } from "../../_lib/utils"
+import { formatDate, slugify } from "../../_lib/utils"
 import projects from "./data"
 import { fetchStargazersCount } from "./github"
 

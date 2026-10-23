@@ -1,12 +1,12 @@
 "use client"
 
 import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { cn } from "cn"
 import { useEffect, useRef, useState } from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
 import { Icon } from "../../_components/icon"
 import { useMediaQuery } from "../../_hooks/use-media-query"
 import { useScroll } from "../../_hooks/use-scroll"
-import { cn } from "../../_lib/utils"
 
 interface TableOfContentsProps {
   headings: { text: string; slug: string }[]
