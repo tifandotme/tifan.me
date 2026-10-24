@@ -1,7 +1,0 @@
-{
-  "mcpServers": {
-    "posthog": {
-      "url": "https://mcp.posthog.com/mcp"
-    }
-  }
-}
