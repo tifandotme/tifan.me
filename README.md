@@ -11,6 +11,16 @@ vp env exec --node 24.22.1 --package-manager bun@1.4.4 vp install --frozen-lockf
 vp env exec --node 24.22.1 --package-manager bun@1.4.4 vp run dev
 ```
 
+## Checks
+
+Run the project checks before opening a pull request:
+
+```sh
+vp check
+vp test run
+vp run build
+```
+
 ## License
 
 All blog posts are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)<br>
