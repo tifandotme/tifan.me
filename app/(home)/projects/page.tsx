@@ -29,7 +29,7 @@ export default function ProjectsPage() {
                 <li key={project.name}>
                   <a
                     href={`#${slugify(project.name)}`}
-                    className="-mx-2 block w-fit cursor-default px-2 py-1 whitespace-nowrap hover:underline hover:underline-offset-1 sm:py-0.5"
+                    className="-mx-2 block w-fit cursor-default px-2 py-1 whitespace-nowrap text-inherit hover:underline hover:underline-offset-1 sm:py-0.5"
                   >
                     {project.name}
                   </a>

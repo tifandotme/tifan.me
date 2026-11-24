@@ -103,10 +103,7 @@ export default async function PostPage(props: {
         )}
       />
 
-      <main
-        className="relative mx-auto max-w-(--breakpoint-2xl) px-(--post-padding) py-16 [--post-padding:1rem] max-xl:pb-24 sm:[--post-padding:1.5rem]"
-        vaul-drawer-wrapper=""
-      >
+      <main className="relative mx-auto max-w-(--breakpoint-2xl) px-(--post-padding) py-16 [--post-padding:1rem] max-xl:pb-24 sm:[--post-padding:1.5rem]">
         <Back className="fixed translate-x-1 -translate-y-1 p-3 max-xl:hidden" />
 
         {post.headings.length !== 0 && (

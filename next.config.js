@@ -1,7 +1,11 @@
 import { withPostHogConfig } from "@posthog/nextjs-config"
 
+const portalUrl =
+  process.env.NODE_ENV === "development" ? process.env["PUBLIC_URL"] : undefined
+
 /** @type {import("next").NextConfig} */
 const config = {
+  ...(portalUrl && { allowedDevOrigins: [new URL(portalUrl).hostname] }),
   reactCompiler: true,
   experimental: {
     typedEnv: true,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import { fonts } from "./_lib/fonts"
 import "./globals.css"
 import { PreloadResources } from "./preload"
@@ -40,6 +41,13 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" className={fonts.map((font) => font.variable).join(" ")}>
       <head>
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="https://unpkg.com/react-grab@0.2.0/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        )}
         <SandPackCSS />
       </head>
       <body>
